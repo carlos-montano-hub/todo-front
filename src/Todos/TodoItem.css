@@ -1,0 +1,23 @@
+.todo-item {
+  display: flexbox;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  margin: 1rem;
+  background-color: #e7e7e789;
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.todo-item table {
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.todo-item th {
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.todo-item td {
+  text-align: center;
+  width: fit-content;
+}

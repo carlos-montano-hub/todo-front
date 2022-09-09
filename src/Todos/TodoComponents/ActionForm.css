@@ -1,0 +1,25 @@
+.action-form {
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  background: hsl(0, 0%, 100%);
+  width: fit-content;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.action-form form {
+  margin: 1rem;
+  content: center;
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: column;
+}
+
+.action-form label {
+  display: flex;
+  padding-top: 5%;
+}

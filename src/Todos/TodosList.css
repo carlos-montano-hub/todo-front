@@ -1,0 +1,14 @@
+.todos-list {
+  margin-top: 1%;
+
+  border: 2px solid rgb(0, 0, 0);
+  width: 80%;
+}
+
+.todos-list th {
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.todos-list td {
+  text-align: center;
+}

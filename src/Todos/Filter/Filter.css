@@ -1,0 +1,45 @@
+.filter-box {
+  border: 2px solid rgb(0, 0, 0);
+  display: flex;
+  margin-top: 1%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #cd0b0b00;
+  width: 80%;
+}
+
+.filter-box form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-right: auto;
+}
+
+.filter-box input {
+  width: 90%;
+}
+
+.filter-box label {
+  width: 10%;
+}
+
+.filter-box select {
+  width: 40%;
+}
+.filter-box div {
+  justify-content: left;
+
+  display: flex;
+  flex-direction: row;
+  margin-left: 1%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-right: 5%;
+}
+
+.filter-box button {
+  align-self: flex-end;
+  height: fit-content;
+  margin-bottom: 5px;
+  margin-right: 5%;
+}
