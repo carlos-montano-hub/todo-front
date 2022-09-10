@@ -1,9 +1,10 @@
 import TodoItem from "./TodoItem";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./TodosList.css";
+import { TodoListContext } from "./TodoListProvider";
 
 const TodoList = (props) => {
-  const deleteTodo = (id) => {};
+  const { todos, fetchTodoList } = useContext(TodoListContext);
 
   return (
     <table className="todos-list">
@@ -17,11 +18,11 @@ const TodoList = (props) => {
         </tr>
       </thead>
       <tbody>
-        {props.todos.map((todoItem) => {
+        {todos.map((todoItem) => {
           return (
             <TodoItem
               todo={{ ...todoItem }}
-              deleteTodo={deleteTodo}
+              // deleteTodo={null}
               key={todoItem.id}
             />
           );

@@ -2,16 +2,21 @@ import "./TodoItem.css";
 import { useState } from "react";
 import TodoDate from "./TodoComponents/TodoDate";
 import { ActionButton } from "./TodoComponents/ActionButton";
+
+import { useEffect, useContext } from "react";
+
+import { TodoListContext } from "./TodoListProvider";
+
 const TodoItem = (props) => {
   const [done, setDone] = useState(props.todo.done);
   const [name, setName] = useState(props.todo.name);
   const [priority, setPriority] = useState(props.todo.priority);
   const [dueDate, setDueDate] = useState(props.todo.dueDate);
 
+  const { fetchAvgTime, putTodo } = useContext(TodoListContext);
+
   const doneHandler = () => {
     setDone((prevDone) => {
-      console.log(!done);
-
       if (!prevDone) {
         fetch("http://localhost:9090/todos/" + props.todo.id + "/done", {
           method: "PUT",
@@ -23,6 +28,9 @@ const TodoItem = (props) => {
       }
       return !prevDone;
     });
+
+    fetchAvgTime();
+    fetchAvgTime();
   };
 
   const updateTodo = (newTodo) => {
@@ -30,14 +38,7 @@ const TodoItem = (props) => {
     setName(newTodo.name);
     setPriority(newTodo.priority);
     setDueDate(newTodo.dueDate);
-    fetch("http://localhost:9090/todos", {
-      method: "POST",
-      body: JSON.stringify({ ...newTodo }),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
+    putTodo(newTodo);
   };
 
   return (

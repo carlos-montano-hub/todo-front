@@ -4,11 +4,17 @@ import Modal from "react-modal";
 
 import "./ActionForm.css";
 
+import { useEffect, useContext } from "react";
+
+import { TodoListContext } from "../TodoListProvider";
+
 Modal.setAppElement("#root");
 
 export const ActionButton = (props) => {
+  const { deleteTodoItem, priorities, fetchTodoList, defaultParams } =
+    useContext(TodoListContext);
+
   const todo = props.todo;
-  const priorities = ["LOW", "MEDIUM", "HIGH"];
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -17,8 +23,9 @@ export const ActionButton = (props) => {
   const [dueDate, setDueDate] = useState(todo.dueDate);
 
   const editModal = () => {
+    if (dueDate === null) setDueDate("");
+
     setIsOpen((prevOpen) => !prevOpen);
-    console.log(todo);
   };
 
   const nameChange = (event) => {
@@ -33,26 +40,44 @@ export const ActionButton = (props) => {
     setDueDate(event.target.value);
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     editModal();
-    const newTodo = {
-      ...todo,
-      name: name,
-      priority: priority,
-      dueDate: dueDate,
-    };
+
+    if (dueDate === "") {
+      var newTodo = {
+        ...todo,
+        name: name,
+        priority: priority,
+        dueDate: null,
+      };
+    } else {
+      var newTodo = {
+        ...todo,
+        name: name,
+        priority: priority,
+        dueDate: dueDate,
+      };
+    }
 
     props.updateTodo(newTodo);
+  };
+
+  const deleteHandler = () => {
+    deleteTodoItem(todo.id);
   };
 
   return (
     <div>
       <button onClick={editModal}>Edit</button>
-      <button onClick={props.deleteTodo}>Delete</button>
+      <button onClick={deleteHandler}>Delete</button>
 
-      <Modal className="action-form" isOpen={isOpen} onRequestClose={editModal}>
-        <form onSubmit={submitHandler} className="action-input">
+      <Modal
+        className="action-modal"
+        isOpen={isOpen}
+        onRequestClose={editModal}
+      >
+        <form onSubmit={submitHandler}>
           <h1>Edit To-do</h1>
           <div>
             <label>Name</label>

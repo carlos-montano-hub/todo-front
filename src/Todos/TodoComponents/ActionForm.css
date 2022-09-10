@@ -1,4 +1,4 @@
-.action-form {
+.action-modal {
   align-items: center;
   margin-left: auto;
   margin-right: auto;
@@ -11,7 +11,7 @@
   border: 2px solid rgb(0, 0, 0);
 }
 
-.action-form form {
+.action-modal form {
   margin: 1rem;
   content: center;
   justify-content: flex-end;
@@ -19,7 +19,7 @@
   flex-direction: column;
 }
 
-.action-form label {
+.action-modal label {
   display: flex;
   padding-top: 5%;
 }
