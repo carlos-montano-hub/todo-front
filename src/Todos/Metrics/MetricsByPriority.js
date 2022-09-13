@@ -4,14 +4,10 @@ import { useState, useEffect, useContext } from "react";
 import { TodoListContext } from "../TodoListProvider";
 
 export const MetricsByPriority = () => {
-  const { fetchAvgTime, avg, todos } = useContext(TodoListContext);
+  const { avg } = useContext(TodoListContext);
   const [timeLow, setTimeLow] = useState("-");
   const [timeMedium, setTimeMedium] = useState("-");
   const [timeHigh, setTimeHigh] = useState("-");
-
-  useEffect(() => {
-    fetchAvgTime();
-  }, [todos]);
 
   useEffect(() => {
     if (avg.timeForLow > 0) setTimeLow(Math.round(avg.timeForLow / 60));

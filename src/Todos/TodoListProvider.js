@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 
 export const TodoListContext = createContext(null);
 
@@ -23,13 +23,18 @@ export const TodoListProvider = (props) => {
     fetchTodoList(newParams);
   };
 
-  const fetchAvgTime = async () => {
-    await fetch("http://localhost:9090/todos/avg")
-      .then((response) => response.json())
-      .then((data) => {
-        //console.log(data);
-        setAvg(data);
+  const sendDone = async (id, isDone) => {
+    if (isDone) {
+      await fetch("http://localhost:9090/todos/" + id + "/done", {
+        method: "PUT",
       });
+    } else {
+      await fetch("http://localhost:9090/todos/" + id + "/undone", {
+        method: "PUT",
+      });
+    }
+
+    fetchTodoList(parameters);
   };
 
   const deleteTodoItem = async (id) => {
@@ -104,83 +109,42 @@ export const TodoListProvider = (props) => {
       filterByNameParam +
       filterByPriorityParam;
 
+    console.log(params);
+
     await fetch(`http://localhost:9090/todos${params}`)
       .then((response) => response.json())
       .then((data) => {
         setTodos(data);
       });
-  };
-
-  const fetchSize = async (parameters) => {
-    const { page, sortBy, filterByDone, filterByName, filterByPriority } = {
-      ...parameters,
-    };
-    console.log(parameters);
-    let sortByParam = "";
-    let filterByDoneParam = "";
-    let filterByNameParam = "";
-    let filterByPriorityParam = "";
-    let pageParam = "?page=1";
-
-    if (page !== null) {
-      pageParam = `?page=${page}`;
-    }
-
-    if (sortBy !== null) {
-      sortByParam = `&sortBy=${sortBy}`;
-    }
-
-    if (filterByDone !== null) {
-      filterByDoneParam = `&filterByDone=${filterByDone}`;
-    }
-
-    if (filterByName !== null && filterByName.trim() !== "") {
-      filterByNameParam = `&filterByName=${filterByName.trim()}`;
-    }
-
-    if (filterByPriority !== null) {
-      filterByPriorityParam = `&filterByPriority=${filterByPriority}`;
-    }
-
-    const params =
-      pageParam +
-      sortByParam +
-      filterByDoneParam +
-      filterByNameParam +
-      filterByPriorityParam;
-
-    console.log(params);
 
     await fetch(`http://localhost:9090/todos/size${params}`)
       .then((response) => response.json())
       .then((data) => {
-        setSize(() => data.size);
+        setSize(data.size);
+      });
+
+    await fetch("http://localhost:9090/todos/avg")
+      .then((response) => response.json())
+      .then((data) => {
+        setAvg(data);
       });
   };
-
-  useEffect(() => {
-    fetchSize(parameters);
-
-    console.log(size);
-  }, []);
 
   return (
     <TodoListContext.Provider
       value={{
         todos,
         setTodos,
-        fetchTodoList,
         priorities,
         defaultParams,
         avg,
-        fetchAvgTime,
         deleteTodoItem,
         putTodo,
         postTodo,
         modifyParams,
         size,
-        fetchSize,
         parameters,
+        sendDone,
       }}
     >
       {props.children}

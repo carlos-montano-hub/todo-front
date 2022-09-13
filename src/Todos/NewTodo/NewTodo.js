@@ -1,21 +1,14 @@
 import "./NewTodo.css";
 
 import Modal from "react-modal";
-import { useEffect, useContext, useState } from "react";
+import { useContext, useState } from "react";
 
 import { TodoListContext } from "../TodoListProvider";
 
 Modal.setAppElement("#root");
 
 export const NewTodo = () => {
-  const {
-    deleteTodoItem,
-    priorities,
-    fetchTodoList,
-    defaultParams,
-    todos,
-    postTodo,
-  } = useContext(TodoListContext);
+  const { priorities, postTodo } = useContext(TodoListContext);
 
   const [name, setName] = useState("");
   const [priority, setPriority] = useState("LOW");
@@ -45,15 +38,8 @@ export const NewTodo = () => {
 
     newTodoModal();
 
-    let i = 0;
-    while (true) {
-      if (todos.filter((e) => e.id === i).length > 0) {
-        i++;
-      } else break;
-    }
-
     const newTodo = {
-      id: i,
+      id: null,
       name: name,
       priority: priority,
       dueDate: dueDate,
@@ -69,7 +55,7 @@ export const NewTodo = () => {
 
   return (
     <div className="new-todo">
-      <button onClick={newTodoModal}>New Todo</button>
+      <button onClick={newTodoModal}>+ New Todo</button>
 
       <Modal
         className="new-todo__Modal"

@@ -1,5 +1,5 @@
 import "./Filter.css";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 
 import { TodoListContext } from "../TodoListProvider";
 
@@ -8,12 +8,8 @@ export const Filter = () => {
   const [priority, setPriority] = useState(null);
   const [done, setDone] = useState(null);
 
-  const { todos, fetchTodoList, priorities, defaultParams, modifyParams } =
+  const { priorities, defaultParams, modifyParams } =
     useContext(TodoListContext);
-
-  useEffect(() => {
-    fetchTodoList(defaultParams);
-  }, []);
 
   const nameChange = (event) => {
     setName(event.target.value);
@@ -35,7 +31,7 @@ export const Filter = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    let params = {
+    const params = {
       ...defaultParams,
       filterByName: name,
       filterByPriority: priority,

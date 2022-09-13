@@ -4,15 +4,14 @@ import Modal from "react-modal";
 
 import "./ActionForm.css";
 
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 
 import { TodoListContext } from "../TodoListProvider";
 
 Modal.setAppElement("#root");
 
 export const ActionButton = (props) => {
-  const { deleteTodoItem, priorities, fetchTodoList, defaultParams } =
-    useContext(TodoListContext);
+  const { deleteTodoItem, priorities, putTodo } = useContext(TodoListContext);
 
   const todo = props.todo;
 
@@ -44,23 +43,18 @@ export const ActionButton = (props) => {
     event.preventDefault();
     editModal();
 
+    const newTodo = {
+      ...todo,
+      name: name,
+      priority: priority,
+      dueDate: dueDate,
+    };
+
     if (dueDate === "") {
-      var newTodo = {
-        ...todo,
-        name: name,
-        priority: priority,
-        dueDate: null,
-      };
-    } else {
-      var newTodo = {
-        ...todo,
-        name: name,
-        priority: priority,
-        dueDate: dueDate,
-      };
+      newTodo.dueDate = null;
     }
 
-    props.updateTodo(newTodo);
+    putTodo(newTodo);
   };
 
   const deleteHandler = () => {
@@ -69,8 +63,12 @@ export const ActionButton = (props) => {
 
   return (
     <div>
-      <button onClick={editModal}>Edit</button>
-      <button onClick={deleteHandler}>Delete</button>
+      <button onClick={editModal} style={{ background: "white" }}>
+        Edit
+      </button>
+      <button onClick={deleteHandler} style={{ background: "white" }}>
+        Delete
+      </button>
 
       <Modal
         className="action-modal"

@@ -1,12 +1,43 @@
 .todos-list {
   margin-top: 1%;
-
-  border: 2px solid rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  height: 9cm;
   width: 80%;
 }
 
-.todos-list th {
+.todos-list table {
+  border-collapse: collapse;
+
   border: 2px solid rgb(0, 0, 0);
+}
+
+.todos-list th {
+  border: 1px solid rgb(0, 0, 0);
+  background-color: #b4b4b4;
+  height: 20px;
+}
+.todos-list__name {
+  border: 1px solid rgb(0, 0, 0);
+  background-color: #b4b4b4;
+  width: 30%;
+  height: 20px;
+}
+
+.todos-list__priority {
+  border: 1px solid rgb(0, 0, 0);
+  background-color: #b4b4b4;
+  cursor: pointer;
+  user-select: none;
+  width: 20%;
+}
+
+.todos-list__due-date {
+  border: 1px solid rgb(0, 0, 0);
+  background-color: #b4b4b4;
+  cursor: pointer;
+  user-select: none;
+  width: 15%;
 }
 
 .todos-list td {
