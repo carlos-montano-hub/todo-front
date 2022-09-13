@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Filter } from "./Filter/Filter";
 import TodoList from "./TodosList";
 import { PageSelect } from "./PageSelect/PageSelect";

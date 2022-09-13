@@ -1,24 +1,25 @@
 import "./PageSelect.css";
-import { useContext } from "react";
-
+import { useContext, useState, useEffect } from "react";
+import { Pagination } from "@mui/material";
 import { TodoListContext } from "../TodoListProvider";
 
 export const PageSelect = () => {
   const { size, parameters, modifyParams } = useContext(TodoListContext);
 
-  const pageChange = (event) => {
-    modifyParams({ ...parameters, page: event.target.value });
+  const [max, setmax] = useState(Math.round(size / 10 + 1));
+
+  const pageChange = (event, value) => {
+    modifyParams({ ...parameters, page: value });
   };
+
+  useEffect(() => {
+    setmax(Math.trunc(size / 10 + 0.9));
+    console.log(size / 10 + 1);
+  }, [size]);
 
   return (
     <div className="page-select">
-      <input
-        type="number"
-        min="1"
-        max={size / 10 + 1}
-        defaultValue={1}
-        onChange={pageChange}
-      ></input>
+      <Pagination count={max} onChange={pageChange} />
     </div>
   );
 };
