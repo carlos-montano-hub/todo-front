@@ -27,6 +27,11 @@ export const ActionButton = (props) => {
     setIsOpen((prevOpen) => !prevOpen);
   };
 
+  const cancelHandler = (event) => {
+    event.preventDefault();
+    setIsOpen(false);
+  };
+
   const nameChange = (event) => {
     setName(event.target.value);
   };
@@ -95,7 +100,7 @@ export const ActionButton = (props) => {
             <input type="date" value={dueDate} onChange={dueDateChange} />
           </div>
 
-          <button onClick={editModal}>Cancel</button>
+          <button onClick={cancelHandler}>Cancel</button>
           <button type="submit">Accept</button>
         </form>
       </Modal>

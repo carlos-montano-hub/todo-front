@@ -15,8 +15,20 @@ export const NewTodo = () => {
   const [dueDate, setDueDate] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
+  const clearAll = () => {
+    setName("");
+    setPriority("LOW");
+    setDueDate("");
+  };
+
   const newTodoModal = () => {
     setIsOpen((prevOpen) => !prevOpen);
+  };
+
+  const cancelHandler = (event) => {
+    event.preventDefault();
+    setIsOpen(false);
+    clearAll();
   };
 
   const nameChange = (event) => {
@@ -49,7 +61,7 @@ export const NewTodo = () => {
       timeToComplete: null,
     };
     console.log(newTodo);
-
+    clearAll();
     postTodo(newTodo);
   };
 
@@ -82,7 +94,7 @@ export const NewTodo = () => {
             <input type="date" value={dueDate} onChange={dueDateChange} />
           </div>
 
-          <button onClick={newTodoModal}>Cancel</button>
+          <button onClick={cancelHandler}>Cancel</button>
           <button type="submit">Accept</button>
         </form>
       </Modal>

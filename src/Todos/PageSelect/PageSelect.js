@@ -14,7 +14,6 @@ export const PageSelect = () => {
 
   useEffect(() => {
     setmax(Math.trunc(size / 10 + 0.9));
-    console.log(size / 10 + 1);
   }, [size]);
 
   return (
