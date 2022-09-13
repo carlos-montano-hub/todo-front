@@ -60,10 +60,12 @@ const TodoList = (props) => {
             <th className="todos-list__name">Name</th>
             <th className="todos-list__priority" onClick={priorityHandler}>
               Priority {sortByPriority && String.fromCharCode(8595)}
+              {!sortByPriority && String.fromCharCode(8596)}
             </th>
 
             <th className="todos-list__due-date" onClick={dueDateHandler}>
               Due Date {sortByDueDate && String.fromCharCode(8595)}
+              {!sortByDueDate && String.fromCharCode(8596)}
             </th>
             <th>Actions </th>
           </tr>
