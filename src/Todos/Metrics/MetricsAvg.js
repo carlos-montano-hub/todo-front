@@ -35,6 +35,8 @@ export const MetricsAvg = () => {
               </label>
             )
         )}
+
+        {avg.timeForAll === 0 && "-"}
       </div>
     </div>
   );
