@@ -109,8 +109,6 @@ export const TodoListProvider = (props) => {
       filterByNameParam +
       filterByPriorityParam;
 
-    console.log(params);
-
     await fetch(`http://localhost:9090/todos${params}`)
       .then((response) => response.json())
       .then((data) => {

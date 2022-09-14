@@ -60,7 +60,6 @@ export const NewTodo = () => {
       doneDate: null,
       timeToComplete: null,
     };
-    console.log(newTodo);
     clearAll();
     postTodo(newTodo);
   };
